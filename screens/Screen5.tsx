@@ -42,7 +42,7 @@ const CourseDetailScreen = () => {
                 borderRadius:50,
                 left: '85%',
                 top: '5%'
-            }} onPress={() => navigation.navigate("CourseScreen")}>
+            }} onPress={() => navigation.navigate("Main")}>
                 <FontAwesomeIcon icon={faX} style={{
                     color : '#ccc'
                 }}></FontAwesomeIcon>
@@ -77,48 +77,6 @@ const CourseDetailScreen = () => {
                     ))}
                     </ScrollView>
                 </View>
-        </View>
-        <View style = {{
-            flex: 1.5,
-            backgroundColor: '#4C4C6B',
-            borderTopLeftRadius: 20,
-            borderTopRightRadius: 20,
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            top: 685,
-            zIndex: 1,
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            paddingLeft: 20,
-            paddingRight: 20,
-        }}>
-            <View style = {{
-                flexDirection: 'row',
-                justifyContent:'space-around',
-                alignItems: 'center',
-                width: '100%',
-                paddingTop: 25,
-            }}>
-                <TouchableOpacity style ={{alignItems: 'center'}} onPress={() => navigation.navigate("HomeScreen")}>
-                    <FontAwesomeIcon icon={faHome} style={{color: '#ccc'}} size={24}></FontAwesomeIcon>
-                    <Text style={styles.footext}>Home</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style ={{alignItems: 'center'}}>
-                    <FontAwesomeIcon icon={faHeartPulse} style={{color: '#ccc'}} size={24}></FontAwesomeIcon>
-                    <Text style={styles.footextSelected}>Classes</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style ={{alignItems: 'center'}} onPress={() => navigation.navigate("PlanningScreen")}>
-                    <FontAwesomeIcon icon={faCalendarDays} style={{color: '#ccc'}} size={24}></FontAwesomeIcon>
-                    <Text style={styles.footext}>Planing</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style ={{alignItems: 'center'}} onPress={() => navigation.navigate("ProfileScreen")}>
-                    <FontAwesomeIcon icon={faUser} style={{color: '#ccc'}} size={24}></FontAwesomeIcon>
-                    <Text style={styles.footext}>Account</Text>
-                </TouchableOpacity>
-            </View>
         </View>
     </View>
   );

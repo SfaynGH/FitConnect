@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import React from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
-import { faUser, faHome, faCalendarDays, faHeartPulse, faX} from '@fortawesome/free-solid-svg-icons';
+import {faX} from '@fortawesome/free-solid-svg-icons';
+import { faSquareFacebook, faGoogle, faApple } from '@fortawesome/free-brands-svg-icons';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 
-const PlaningDetailScreen = () => {
+const CoachDetail = () => {
   const navigation = useNavigation();
     const personalTrainer ={ name: 'Emile', FamilyName: 'Cassel', image: require('../assets/images/emile.jpg'), years: '3' };
     const course = { name: 'Yoga', image: require('../assets/images/yoga.png'), date: 'Tuesday 24 Nov', duration: '30 mins', Time: '9:30 am' };
@@ -49,27 +50,22 @@ const PlaningDetailScreen = () => {
             flexDirection: 'column',
             paddingLeft: 20,
             paddingRight: 20,
+            alignItems: 'center',
         }}>
-            <View style={{flexDirection: 'row'}}>
-                <Text style = {styles.title}>{course.name}</Text>
-                <View style={{flexDirection: 'column', alignItems: 'center', top:10,left: 160}}>
-                    <Text>{course.date}</Text>
-                    <Text>{course.Time} - {course.duration}</Text>
-                </View>
+            <Image source={personalTrainer.image} style= {styles.trainerImage}/>
+            <Text style = {styles.personalTrainerName}>{personalTrainer.name} {personalTrainer.FamilyName}</Text>
+            <Text style = {styles.personalTrainerYears}>{personalTrainer.years} years of experience</Text>
+            <View style={styles.socialContainer}>
+                <TouchableOpacity style={styles.socialButton}>
+                    <FontAwesomeIcon icon={faGoogle} size={24} color="#DB4437" />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.socialButton}>
+                    <FontAwesomeIcon icon={faApple} size={24} color="#000" />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.socialButton}>
+                    <FontAwesomeIcon icon={faSquareFacebook} size={24} color="#4267B2" />
+                </TouchableOpacity>
             </View>
-            <View>
-                <Text>Instractor</Text>
-                <View style = {{flexDirection: 'row'}}>
-                    <TouchableOpacity><Image source={personalTrainer.image} style = {styles.trainerImage}/></TouchableOpacity>
-                    <View style = {{flexDirection: 'column', marginLeft: 25, marginTop: 10}}>
-                        <Text style = {styles.personalTrainerName}>{personalTrainer.name} {personalTrainer.FamilyName}</Text>
-                        <Text style = {styles.personalTrainerYears}>{personalTrainer.years} years of experience</Text>
-                    </View>
-                </View>
-            </View>
-            <TouchableOpacity style = {styles.bookBottom}>
-                <Text style = {styles.bookButtonText}>Book Class</Text>
-            </TouchableOpacity>
         </View>
     </View>
   );
@@ -134,12 +130,13 @@ const styles = StyleSheet.create({
       },
       trainerImage: {
         marginTop: 20,
-        width: 90,
-        height: 90,
-        borderRadius: 50,
+        width: 150,
+        height: 150,
+        borderRadius: 75,
+        top: -100,
       },
       personalTrainerYears: {
-
+        top: -100,
       },
       personalTrainerName: {
         marginTop: 25,
@@ -147,6 +144,7 @@ const styles = StyleSheet.create({
         color: 'white',
         marginBottom: 8,
         fontWeight: 'bold',
+        top: -100,
       },
       trainerName: {
         fontSize: 12,
@@ -173,6 +171,22 @@ const styles = StyleSheet.create({
         paddingBottom: 12,
         textAlign: 'center',
       },
+      socialContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: 'auto',
+        alignItems: 'center',
+        alignContent: 'center',
+        gap: 30,
+      },
+      socialButton: {
+        width: 70,
+        height: 70,
+        backgroundColor: 'rgba(255, 255, 255, 0.25)',
+        borderRadius: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
 });
 
-export default PlaningDetailScreen;
+export default CoachDetail;

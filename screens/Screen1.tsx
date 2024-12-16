@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { TextInput, StyleSheet, View, Text, Image, Pressable, TouchableOpacity, ImageBackground, } from 'react-native';
+import { TextInput, StyleSheet, View, Text, Image, Pressable, TouchableOpacity, ImageBackground, Alert, } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faKey } from '@fortawesome/free-solid-svg-icons';
@@ -7,10 +7,29 @@ import { faEye } from '@fortawesome/free-regular-svg-icons';
 import LinearGradient from 'react-native-linear-gradient';
 import { faSquareFacebook, faGoogle, faApple } from '@fortawesome/free-brands-svg-icons';
 import { useNavigation } from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
+import { text } from '@fortawesome/fontawesome-svg-core';
 
-export default function LogInScreen() {
-  const navigation = useNavigation();
-  const [Reload, setReload] = useState(true)
+export default function LogInScreen({navigation}) {
+  const [Reload, setReload] = useState(true);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const login = () => {
+    auth().signInWithEmailAndPassword(email,password)
+    .then((res) => {
+      console.log(res)
+      Alert.alert("Login successful")
+      setEmail('')
+      setPassword('')
+      navigation.navigate('Main')
+    })
+    .catch((err) => {
+      console.log(err)
+      Alert.alert(err.nativeErrorMessage)
+    })
+  }
+
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -66,6 +85,8 @@ export default function LogInScreen() {
                 <View style={styles.inputContainer}>
                   <FontAwesomeIcon icon={faUser} style={{color: '#ccc'}}/>
                   <TextInput
+                    value={email}
+                    onChangeText={text => setEmail(text)}
                     placeholder="Username"
                     placeholderTextColor="#ccc"
                     style={styles.input}
@@ -75,6 +96,8 @@ export default function LogInScreen() {
                 <View style={styles.inputContainer}>
                   <FontAwesomeIcon icon={faKey} style={{color: '#ccc'}}/>
                   <TextInput
+                    value={password}
+                    onChangeText={text => setPassword(text)}
                     placeholder="Password"
                     placeholderTextColor="#ccc"
                     secureTextEntry
@@ -92,7 +115,7 @@ export default function LogInScreen() {
                   start={{x: 0, y: 0}}
                   end={{x: 1, y: 0}}
                 >
-                  <TouchableOpacity style={styles.signInButton} onPress={() => navigation.navigate("SignUpScreen")}>
+                  <TouchableOpacity style={styles.signInButton} onPress={login}>
                     <Text style={styles.signInText}>Sign in</Text>
                   </TouchableOpacity>
                 </LinearGradient>
